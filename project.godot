@@ -16,8 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="centri"
-run/main_scene="res://objects/world.tscn"
+run/main_scene="res://menus/MainMenu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+game_states="*res://objects/global/game_states.gd"
 
 [display]
 

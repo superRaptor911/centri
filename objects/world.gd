@@ -1,6 +1,8 @@
 extends Node
 
 var rotator_scn = preload("res://objects/rotator.tscn")
+var game_scn = preload("res://objects/game.tscn")
+var game_over_scn = preload("res://menus/GameOver.tscn")
 
 export var max_rot = 2
 export var min_dist = 600
@@ -8,7 +10,8 @@ export var max_dist = 1000
 
 var score = 0
 
-var camera
+var camera = null
+var game = null
 var rott_id = 0
 var rot_arr = Array()
 var cur_rot_ref = null
@@ -16,9 +19,24 @@ var cur_rot_ref = null
 func _ready():
 	rand_seed(OS.get_unix_time())
 	randomize()
-	camera = $ball/Camera2D
+	startGame()
+
+
+func startGame():
+	$music.play()
+	if game:
+		print_debug("Error : game not freed")
+		game.queue_free()
+	
+	game = game_scn.instance()
+	add_child(game)
+	camera = game.get_node("ball/Camera2D")
+	game.get_node("ball").connect("game_over",self,"_on_game_over")
 	genRotators()
 
+
+func endGame():
+	pass
 
 func genRotators(val = 0):
 	var new_pos
@@ -29,7 +47,7 @@ func genRotators(val = 0):
 		var rot = rotator_scn.instance()
 		rot.position = new_pos
 		rot.angular_velocity = rand_range(2,5)
-		add_child(rot)
+		game.add_child(rot)
 		rot.connect("current_rotator",self,"_on_landed_on_rotator")
 
 
@@ -53,3 +71,26 @@ func _on_landed_on_rotator(rotator):
 
 func _on_TouchScreenButton_pressed():
 	Input.action_press("ui_up")
+
+
+func _on_game_over():
+	$music.stop()
+	yield(get_tree().create_timer(1.5), "timeout")
+	$CanvasLayer/score.hide()
+	game.queue_free()
+	game = null
+	var game_over = game_over_scn.instance()
+	add_child(game_over)
+	game_over.showScore(score)
+	game_over.connect("restart",self,"restartGame")
+	game_over.connect("main_menu",self,"go_to_mainMenu")
+	score = 0
+
+
+func restartGame():
+	$CanvasLayer/score/Label.text = "0"
+	$CanvasLayer/score.show()
+	startGame()
+
+func go_to_mainMenu():
+	get_tree().change_scene("res://menus/MainMenu.tscn")
