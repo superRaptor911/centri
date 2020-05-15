@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://objects/ball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/world.gd" type="Script" id=2]
+[ext_resource path="res://objects/rotator.tscn" type="PackedScene" id=3]
+[ext_resource path="res://hg.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://objects/misc/fpsMeter.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+dof_blur_far_distance = 1.25
+dof_blur_far_amount = 0.24
+glow_enabled = true
+glow_blend_mode = 0
+glow_hdr_threshold = 0.34
+adjustment_brightness = 0.74
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+void fragment()
+{
+	COLOR.r += UV.y * sin(TIME);
+	COLOR.g += cos(UV.x) * sin(TIME * 2.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.835294, 0.321569, 0.745098, 0.666667 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 600, 300 )
+
+[node name="world" type="Node"]
+script = ExtResource( 2 )
+min_dist = 300
+max_dist = 500
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="ball" parent="." instance=ExtResource( 1 )]
+position = Vector2( 643.11, 342.643 )
+velocity = 600
+
+[node name="Camera2D" type="Camera2D" parent="ball"]
+current = true
+smoothing_enabled = true
+smoothing_speed = 10.0
+
+[node name="rotator" parent="." instance=ExtResource( 3 )]
+position = Vector2( 549.558, 320.84 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="score" type="Panel" parent="CanvasLayer"]
+material = SubResource( 3 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -65.5
+margin_right = 65.5
+margin_bottom = 61.0
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/score"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -21.5
+margin_right = 20.0
+margin_bottom = 21.5
+rect_pivot_offset = Vector2( 19.236, 22.6638 )
+custom_fonts/font = SubResource( 5 )
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2( 46.937, 81.4898 )
+shape = SubResource( 6 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="fpsMeter" parent="." instance=ExtResource( 5 )]
+[connection signal="pressed" from="CanvasLayer/TouchScreenButton" to="." method="_on_TouchScreenButton_pressed"]

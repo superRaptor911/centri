@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://sprites/rotator.png" type="Texture" id=1]
+[ext_resource path="res://objects/rotator.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 134.637
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.833333, 0.677273 ), -0.988636, -0.988636, 0, 0, Vector2( 1, 0.186364 ), -0.746969, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.761589, 1 )
+colors = PoolColorArray( 0.286312, 0.847656, 0.129135, 1, 0.571248, 0.804688, 0.194885, 1, 1, 1, 1, 0 )
+
+[node name="rotator" type="Sprite" groups=[
+"Rotator",
+]]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 24
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 200.0
+angular_velocity = 200.0
+scale_amount = 60.0
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 3 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
