@@ -10,8 +10,13 @@ func _ready():
 
 
 func showScore(score):
+	$score2.text = "HIGH SCORE  " + String(game_states.player_info.high_score)
 	$score.text = "SCORE  " + String(score)
-	tweenStart()
+	if score > game_states.player_info.high_score:
+		$score2.text = "HIGH SCORE  " + String(score)
+		game_states.player_info.high_score = score
+		game_states.saveEverything()
+		tweenStart()
 
 
 func tweenStart():

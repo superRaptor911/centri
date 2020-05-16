@@ -8,7 +8,10 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if game_states.game_settings.glow:
+		$WorldEnvironment.environment = load("res://objects/misc/world.tres")
+	else:
+		$WorldEnvironment.environment = load("res://default_env.tres")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,7 +24,7 @@ func _on_start_pressed():
 
 
 func _on_option_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene("res://menus/OptionMenu.tscn")
 
 
 func _on_exit_pressed():

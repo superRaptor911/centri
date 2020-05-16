@@ -6,7 +6,7 @@
 [ext_resource path="res://objects/misc/fpsMeter.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/misc/world.tres" type="Environment" id=6]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 void fragment()
@@ -15,22 +15,22 @@ void fragment()
 	COLOR.g += cos(UV.x) * sin(TIME * 2.0);
 }"
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.835294, 0.321569, 0.745098, 0.666667 )
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 use_filter = true
 font_data = ExtResource( 4 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 600, 300 )
 
 [node name="world" type="Node"]
@@ -44,13 +44,13 @@ environment = ExtResource( 6 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="score" type="Panel" parent="CanvasLayer"]
-material = SubResource( 3 )
+material = SubResource( 2 )
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -65.5
 margin_right = 65.5
 margin_bottom = 61.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -65,7 +65,7 @@ margin_top = -21.5
 margin_right = 20.0
 margin_bottom = 21.5
 rect_pivot_offset = Vector2( 19.236, 22.6638 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "0"
 align = 1
 __meta__ = {
@@ -74,7 +74,7 @@ __meta__ = {
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="CanvasLayer"]
 position = Vector2( 46.937, 81.4898 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="Tween" type="Tween" parent="."]
 

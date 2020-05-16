@@ -17,13 +17,17 @@ var rot_arr = Array()
 var cur_rot_ref = null
 
 func _ready():
+	game_states.main_music.stop()
 	rand_seed(OS.get_unix_time())
 	randomize()
+	if game_states.game_settings.glow:
+		$WorldEnvironment.environment = load("res://objects/misc/world.tres")
+	else:
+		$WorldEnvironment.environment = load("res://default_env.tres")
 	startGame()
 
 
 func startGame():
-	$music.play()
 	if game:
 		print_debug("Error : game not freed")
 		game.queue_free()
@@ -33,6 +37,8 @@ func startGame():
 	camera = game.get_node("ball/Camera2D")
 	game.get_node("ball").connect("game_over",self,"_on_game_over")
 	genRotators()
+	#yield(get_tree().create_timer(1), "timeout")
+	$music.play()
 
 
 func endGame():
@@ -55,6 +61,12 @@ func genRandom() -> Vector2:
 	var rtn = Vector2()
 	rtn.x = (randf() * (1280 - min_dist) + min_dist)
 	rtn.y = (randf() * (720 - min_dist) + min_dist)
+	var rots = get_tree().get_nodes_in_group("Rotator")
+	print(rots.size())
+	for i in rots:
+		if (i.position - rtn).length() < 250:
+			print("close call fixing")
+			rtn += (rtn - i.position).normalized() * 200
 	return rtn
 
 
@@ -93,4 +105,5 @@ func restartGame():
 	startGame()
 
 func go_to_mainMenu():
+	game_states.main_music.play()
 	get_tree().change_scene("res://menus/MainMenu.tscn")

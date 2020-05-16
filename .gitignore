@@ -2,4 +2,4 @@ output/
 *.apk
 *.exe
 *.import
-
+android/

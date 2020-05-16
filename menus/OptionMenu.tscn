@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://hg.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://objects/misc/world.tres" type="Environment" id=2]
 [ext_resource path="res://menus/OptionMenu.gd" type="Script" id=3]
+[ext_resource path="res://admob-lib/admob.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -108,20 +109,25 @@ __meta__ = {
 }
 
 [node name="back" type="Button" parent="."]
-anchor_left = 0.5
-anchor_top = 0.794
-anchor_right = 0.5
-anchor_bottom = 0.794
-margin_left = -80.0986
-margin_top = -31.6948
-margin_right = 68.9014
-margin_bottom = 31.3052
+anchor_left = 0.498
+anchor_top = 0.75
+anchor_right = 0.498
+anchor_bottom = 0.75
+margin_left = -74.6747
+margin_top = -31.5183
+margin_right = 74.3253
+margin_bottom = 31.4817
 custom_styles/normal = SubResource( 3 )
 custom_fonts/font = SubResource( 4 )
 text = "BACK"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Admob" type="Node" parent="."]
+script = ExtResource( 4 )
+banner_on_top = false
+banner_id = "ca-app-pub-9443221640471166/8614584209"
 [connection signal="toggled" from="glow/glow" to="." method="_on_glow_toggled"]
 [connection signal="toggled" from="music/music" to="." method="_on_music_toggled"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
