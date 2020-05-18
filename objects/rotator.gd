@@ -1,14 +1,10 @@
 extends Sprite
 
 export var angular_velocity = 2.0
-var speed = 0.0
 var camera = null
 signal current_rotator(rot)
 export var points = 1
 
-func _ready():
-	speed = angular_velocity * texture.get_height()
-	
 
 func _process(delta):
 	rotation += angular_velocity * delta
@@ -18,7 +14,6 @@ func _process(delta):
 
 func setOmega(w):
 	angular_velocity = w
-	speed = angular_velocity * texture.get_height()
 
 
 func _on_Area2D_body_entered(body):
@@ -28,7 +23,7 @@ func _on_Area2D_body_entered(body):
 		var dir = (body.position - position).normalized()
 		body.position = position + dir * distance
 		
-		body.setRevolving(position,angular_velocity)
+		body.setRevolving(position,angular_velocity,self)
 		emit_signal("current_rotator",self)
 
 
