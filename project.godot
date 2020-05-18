@@ -26,7 +26,8 @@ modules="org/godotengine/godot/GodotAdMob"
 
 config/name="centri"
 run/main_scene="res://menus/MainMenu.tscn"
-config/icon="res://icon.png"
+boot_splash/image="res://sprites/qq.png"
+config/icon="res://sprites/icon.png"
 
 [autoload]
 
@@ -36,6 +37,7 @@ game_states="*res://objects/global/game_states.gd"
 
 window/size/width=1280
 window/size/height=720
+window/size/fullscreen=true
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 

@@ -4,7 +4,7 @@ export var angular_velocity = 2.0
 var speed = 0.0
 var camera = null
 signal current_rotator(rot)
-
+export var points = 1
 
 func _ready():
 	speed = angular_velocity * texture.get_height()

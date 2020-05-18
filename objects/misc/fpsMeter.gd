@@ -5,6 +5,7 @@ var fps = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Label.visible = game_states.game_settings.fps
 	pass # Replace with function body.
 
 

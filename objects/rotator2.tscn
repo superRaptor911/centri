@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://objects/rotator.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/rotator2.png" type="Texture" id=2]
+[ext_resource path="res://objects/rotator2.gd" type="Script" id=3]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.761589, 1 )
+colors = PoolColorArray( 0.0999413, 0.350723, 0.624023, 1, 0.124115, 0.218329, 0.648438, 1, 1, 1, 1, 0 )
+
+[node name="rotator2" instance=ExtResource( 1 )]
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+points = 3
+
+[node name="CPUParticles2D" parent="." index="1"]
+color_ramp = SubResource( 1 )

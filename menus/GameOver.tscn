@@ -28,7 +28,7 @@ border_width_bottom = 3
 border_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="DynamicFont" id=5]
-size = 24
+size = 32
 use_filter = true
 font_data = ExtResource( 1 )
 
@@ -52,13 +52,13 @@ __meta__ = {
 
 [node name="score" type="Label" parent="."]
 anchor_left = 0.5
-anchor_top = 0.365
+anchor_top = 0.343
 anchor_right = 0.5
-anchor_bottom = 0.365
+anchor_bottom = 0.343
 margin_left = -107.0
-margin_top = -24.8
+margin_top = -24.8267
 margin_right = 108.0
-margin_bottom = 25.2
+margin_bottom = 25.1733
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.839216, 0.776471, 0.0823529, 1 )
 text = "SCORE  10"
@@ -84,15 +84,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="new_high" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.611
 anchor_right = 0.5
 anchor_bottom = 0.611
 margin_left = -270.0
-margin_top = -36.7512
+margin_top = -118.59
 margin_right = 270.0
-margin_bottom = 37.2488
+margin_bottom = -44.5902
 rect_pivot_offset = Vector2( 270.297, 37.0682 )
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.917647, 0.388235, 0.917647, 1 )
@@ -105,13 +105,13 @@ __meta__ = {
 
 [node name="retry" type="Button" parent="."]
 anchor_left = 0.5
-anchor_top = 0.779
+anchor_top = 0.682
 anchor_right = 0.5
-anchor_bottom = 0.779
-margin_left = -86.0
-margin_top = -26.7899
-margin_right = 86.0
-margin_bottom = 27.2101
+anchor_bottom = 0.682
+margin_left = -90.76
+margin_top = -38.1468
+margin_right = 95.24
+margin_bottom = 39.8532
 custom_styles/hover = SubResource( 4 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 4 )
@@ -125,13 +125,13 @@ __meta__ = {
 
 [node name="main_menu" type="Button" parent="."]
 anchor_left = 0.5
-anchor_top = 0.921
+anchor_top = 0.865
 anchor_right = 0.5
-anchor_bottom = 0.921
-margin_left = -86.0
-margin_top = -27.1489
-margin_right = 86.0
-margin_bottom = 26.8511
+anchor_bottom = 0.865
+margin_left = -122.0
+margin_top = -31.8
+margin_right = 135.0
+margin_bottom = 40.2
 custom_styles/hover = SubResource( 4 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 4 )
@@ -145,7 +145,7 @@ __meta__ = {
 
 [node name="Admob" type="Node" parent="."]
 script = ExtResource( 2 )
-interstitial_id = "ca-app-pub-9443221640471166/5988420865"
+is_real = true
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="pressed" from="retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="main_menu" to="." method="_on_main_menu_pressed"]

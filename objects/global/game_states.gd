@@ -4,6 +4,7 @@ var game_settings = {
 	version = 1.0,
 	glow = true,
 	music = true,
+	fps = false
 }
 
 var player_info = {
@@ -16,12 +17,13 @@ var stream = preload("res://music/BoxCat_Games_-_10_-_Epic_Song.ogg")
 func _ready():
 	add_child(main_music)
 	main_music.stream = stream
-	main_music.play()
 	if load_data("user://game_settings").has("version"):
 		loadEverything()
 	else:
 		print("first run")
 		saveEverything()
+	if game_settings.music:
+		main_music.play()
 
 func saveEverything():
 	save_data("user://game_settings",game_settings)

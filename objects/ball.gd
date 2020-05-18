@@ -32,14 +32,14 @@ func setRevolving(pos,w):
 	angular_velocity = w
 	radius = (position - pos).length()
 	angle = position.angle_to_point(pos)
-	print(angle * 180 / PI)
 	$jump.play()
 	
 
 func detach():
-	is_revolving = false
-	mov_dir = Vector2(cos(angle + PI /2),sin(angle + PI / 2))
-	$die.play()
+	if is_revolving:
+		is_revolving = false
+		mov_dir = Vector2(cos(angle + PI /2),sin(angle + PI / 2))
+		$die.play()
 
 
 func _process(_delta):
