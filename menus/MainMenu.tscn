@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://hg.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://objects/misc/world.tres" type="Environment" id=2]
 [ext_resource path="res://objects/rotator.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/ball.tscn" type="PackedScene" id=4]
 [ext_resource path="res://menus/MainMenu.gd" type="Script" id=5]
-[ext_resource path="res://admob-lib/admob.gd" type="Script" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -102,12 +101,6 @@ angular_velocity = 2.5
 
 [node name="ball" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1117.82, 245.061 )
-
-[node name="Admob" type="Node" parent="."]
-script = ExtResource( 6 )
-is_real = true
-banner_on_top = false
-banner_id = "ca-app-pub-9443221640471166/8614584209"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0

@@ -17,8 +17,8 @@ func _ready():
 	b1.rect_pivot_offset = b1.rect_size / 2
 	b2.rect_pivot_offset = b2.rect_size / 2
 	b3.rect_pivot_offset = b3.rect_size / 2
-	$Admob.load_banner()
-	$Admob.show_banner()
+	game_states.admob.load_banner()
+	game_states.admob.show_banner()
 	if game_states.game_settings.glow:
 		$WorldEnvironment.environment = load("res://objects/misc/world.tres")
 	else:
@@ -36,7 +36,7 @@ func _ready():
 
 
 func _on_start_pressed():
-	$Admob.hide_banner()
+	game_states.admob.hide_banner()
 	get_tree().change_scene("res://objects/world.tscn")
 
 

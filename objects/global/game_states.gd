@@ -14,7 +14,11 @@ var player_info = {
 var main_music = AudioStreamPlayer.new()
 var stream = preload("res://music/BoxCat_Games_-_10_-_Epic_Song.ogg")
 
+var admob : Admob = Admob.new()
+var retry_count = 0
+
 func _ready():
+	add_child(admob)
 	add_child(main_music)
 	main_music.stream = stream
 	if load_data("user://game_settings").has("version"):
@@ -24,6 +28,12 @@ func _ready():
 		saveEverything()
 	if game_settings.music:
 		main_music.play()
+	
+	#admob.is_real = true
+	admob.banner_on_top = false
+	admob.load_interstitial()
+	admob.load_rewarded_video()
+
 
 func saveEverything():
 	save_data("user://game_settings",game_settings)
